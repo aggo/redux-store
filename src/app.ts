@@ -13,13 +13,17 @@ const store = new fromStore.Store(
 
 console.log(store.value);
 
-// save returned value from store.subscribe to be able to unsubscribe
-const unsubscribe = store.subscribe((state) => {
-    // build a list of the todos and show how many there are
+function renderTodos(state) {
+// build a list of the todos and show how many there are
     number.innerText = state.todos.data.length;
     todoList.innerHTML = state.todos.data.map(d =>
         '<li>' + d.label + '</li>'
     );
+}
+
+// save returned value from store.subscribe to be able to unsubscribe
+const unsubscribe = store.subscribe((state) => {
+    renderTodos(state);
 });
 
 
@@ -57,3 +61,6 @@ todoList.addEventListener('click', function (event) {
 destroy.addEventListener('click', (event) => {
     unsubscribe();
 });
+
+// log store changes
+store.subscribe(state => console.log('STATE:::', state));

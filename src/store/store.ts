@@ -35,10 +35,7 @@ export class Store {
         // };
         this.state = this.reduce(this.state, action);
         // we then inform our subscribers that something has changed
-        // subscribers are just functions that we call
-        this.subscribers.forEach(fn => {
-            fn(this.value);
-        });
+        this.notify()
     }
 
     private reduce(state, action) {
@@ -57,8 +54,8 @@ export class Store {
     // "give me data when it's available or when it changes"
     subscribe(fn) {
         this.subscribers = [...this.subscribers, fn];
-        // send current state to subscriber on first subscribe
-        fn(this.value);
+        // send current state to subscribers on first subscribe
+        this.notify();
         // function closure which when invoked unsubscribes us (removes us
         // from the list of subscribers)
         // use as:
@@ -68,4 +65,11 @@ export class Store {
             this.subscribers = this.subscribers.filter(sub => sub !== fn);
         };
     }
+
+    // notify all subscribers about the new state
+    private notify() {
+        // subscribers are just functions that we call
+        this.subscribers.forEach(fn => fn(this.value));
+    }
+
 }
