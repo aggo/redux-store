@@ -1,9 +1,3 @@
-export const initialState = {
-    data: [],
-    loaded: false,
-    loading: false,
-};
-
 export class Store {
     /**
      1. For this example, state looks like{

@@ -1,4 +1,8 @@
-import { initialState } from './store';
+export const initialState = {
+    loaded: false,
+    loading: false,
+    data: [{label: 'Eat pizza', complete: false}],
+};
 
 export function todosReducer(
     state = initialState,
