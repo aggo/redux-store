@@ -36,24 +36,19 @@ addButton.addEventListener(
         }
         // build payload for action
         const payload = {label: input.value, complete: false};
-        // build action for dispatch
-        const action: Action = {
-            type: 'ADD_TODO',
-            payload: payload
-        };
-        // dispatch action
-        store.dispatch(action);
+        // build action for dispatch and dispatch action
+        store.dispatch(new fromStore.AddTodo(payload));
         // reset input
         input.value = '';
     },
     false
 );
 
-// todo implement something here as well
 todoList.addEventListener('click', function (event) {
     const target = event.target as HTMLButtonElement;
     if (target.nodeName.toLowerCase() === 'button') {
-        console.log(target);
+        const todo = JSON.parse(target.getAttribute('data-todo') as any);
+        store.dispatch(new fromStore.RemoveTodo(todo));
     }
 });
 
