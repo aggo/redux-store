@@ -1,5 +1,4 @@
-import { initialState, Store } from './store/store';
-import { todosReducer } from './store/reducers';
+import * as fromStore from './store';
 
 const input = document.querySelector('input') as HTMLInputElement;
 const addButton = document.querySelector('.add-button') as HTMLButtonElement;
@@ -7,7 +6,12 @@ const destroy = document.querySelector('.unsubscribe') as HTMLButtonElement;
 const todoList = document.querySelector('.todos') as HTMLLIElement;
 let number = document.querySelector('.number') as HTMLLIElement;
 
-const store = new Store({todos: todosReducer}, initialState);
+const store = new fromStore.Store(
+    {},
+    {todos: [{label: 'Eat pizza', complete: false}]}
+);
+
+console.log(store.value);
 
 // save returned value from store.subscribe to be able to unsubscribe
 const unsubscribe = store.subscribe((state) => {
