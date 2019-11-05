@@ -23,7 +23,11 @@ export function todosReducer(
             const data = state.data.filter(
                 todo => todo.label !== action.payload.label
             );
+            return {
+                ...state,
+                data
+            };
         }
-        return state;
     }
+        return state;
 }

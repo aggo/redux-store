@@ -1,23 +1,18 @@
-interface Action {
-    type: string;
-    payload?: any;
-}
-
 // action constants
 export const ADD_TODO = '[Todo] Add Todo';
 export const REMOVE_TODO = '[Todo] Remove Todo';
 
 // action creators
-export class AddTodo implements Action {
+export class AddTodo {
     readonly type = ADD_TODO;
 
-    constructor(payload: any) {
+    constructor(private payload: any) {
     }
 }
 
-export class RemoveTodo implements Action {
+export class RemoveTodo {
     readonly type = REMOVE_TODO;
 
-    constructor(payload: any) {
+    constructor(private payload: any) {
     }
 }

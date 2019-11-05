@@ -5,18 +5,18 @@ const input = document.querySelector('input') as HTMLInputElement;
 const addButton = document.querySelector('.add-button') as HTMLButtonElement;
 const destroy = document.querySelector('.unsubscribe') as HTMLButtonElement;
 const todoList = document.querySelector('.todos') as HTMLLIElement;
-let number = document.querySelector('.number') as HTMLLIElement;
 
-const store = new fromStore.Store(
-    {},
-    {todos: [{label: 'Eat pizza', complete: false}]}
-);
+const reducers = {
+    todos: fromStore.todosReducer,
+};
+
+const store = new fromStore.Store(reducers);
 
 console.log(store.value);
 
 // save returned value from store.subscribe to be able to unsubscribe
 const unsubscribe = store.subscribe((state) => {
-    renderTodos(state);
+    renderTodos(state.todos.data);
 });
 
 
